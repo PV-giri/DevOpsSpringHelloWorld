@@ -87,14 +87,15 @@ pipeline {
                                          done
                                     '''
                                     
-                                    def responce = sh(
+                                    def response = sh(
                                         script: '''
-                                            responce=$(curl --write-out '%{http_code}' \
+                                            $(curl --write-out '%{http_code}' \
                                                 --silent --output /dev/null temptest:8989/heresy)
                                         ''', 
                                         returnStdout: true).trim()
-                                    assert responce != 200
-                              }
+                                    
+                                    assert response == '200'
+                               }
                             }
                         } 
                     } catch(ex){
